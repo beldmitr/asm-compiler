@@ -24,9 +24,6 @@ PropertyLine::PropertyLine(const std::string& line) {
     
     if (line.empty())
     {
-        //TODO: log this as info or debug
-        
-        
         // ignore this
         return;
     }
@@ -35,8 +32,6 @@ PropertyLine::PropertyLine(const std::string& line) {
     // Check if this is a comment
     if (nl[0] == '#')
     {
-        // TODO: log this as info
-        
         // ignore this
         return;
     }

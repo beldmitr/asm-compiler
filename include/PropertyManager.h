@@ -23,7 +23,7 @@ public:
     PropertyManager();
     virtual ~PropertyManager();
 private:
-    const std::string filename = "assembler.properties";
+    const std::string filename = "../Resources/assembler.properties";
     std::map<std::string, std::string> property_map;
 };
 

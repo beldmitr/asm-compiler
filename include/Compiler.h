@@ -5,20 +5,22 @@
  */
 
 /* 
- * File:   Compiler.cpp
+ * File:   Compiler.h
  * Author: user
- * 
+ *
  * Created on April 23, 2019, 5:03 PM
  */
 
-#include "Compiler.h"
+#ifndef COMPILER_H
+#define COMPILER_H
 
-Compiler::Compiler() {
-}
+class Compiler {
+public:
+    Compiler();
+    virtual ~Compiler();
+private:
 
-Compiler::Compiler(const Compiler& orig) {
-}
+};
 
-Compiler::~Compiler() {
-}
+#endif /* COMPILER_H */
 

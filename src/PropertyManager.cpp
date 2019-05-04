@@ -19,12 +19,15 @@
 #include <cstring>  // needed for std::strerror
 #include <memory>
 
-PropertyManager::PropertyManager() {
+#include <g3log/g3log.hpp>
+
+PropertyManager::PropertyManager()
+{
     std::fstream file(filename);
     if (!file.is_open())
     {
-        // TODO: Add log
-        std::cerr << std::strerror(errno) << std::endl;
+        LOG(WARNING) << std::strerror(errno);
+
         // TODO: throw exception or just use errno??
         return;
     }
