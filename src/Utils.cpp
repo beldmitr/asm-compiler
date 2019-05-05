@@ -26,9 +26,13 @@ void Utils::_ltrim(std::string& str)
 
 void Utils::_rtrim(std::string& str)
 {
-    str.erase(std::find_if(str.begin(), str.end(), [](int ch) {
-        return !std::isspace(ch);
-    }), str.end());
+    for (int i = str.length() - 1; i > 0; i--)
+    {
+        if (str[i] == ' ')
+            str.erase(i, 1);
+        else
+            break;
+    }
 }
 
 
@@ -53,8 +57,8 @@ std::string Utils::trim(const std::string& str)
 {
     std::string copy(str);
     
-    ltrim(copy);
-    rtrim(copy);
+    _ltrim(copy);
+    _rtrim(copy);
     
     return copy;
 }
