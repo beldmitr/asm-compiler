@@ -73,6 +73,9 @@ std::vector<std::string> Utils::split(const std::string& str, const std::string&
         begin = end + 1 ;
         end = str.find(regex, begin);
     }
+
+    std::string lastPart = str.substr(begin, str.length());
+    arrs.push_back(lastPart);
     
     return arrs;
 }
