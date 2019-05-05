@@ -6,7 +6,7 @@
 
 /* 
  * File:   main.cpp
- * Author: user
+ * Author: wbull
  *
  * Created on April 18, 2019, 5:12 PM
  */
@@ -22,10 +22,13 @@
 #include "PropertyManager.h"
 
 
+const std::string logsFilename = "asm-compiler";
+const std::string logsDir = "./";
+
 void InitializeLogs()
 {
     auto worker {g3::LogWorker::createLogWorker()};
-    auto defaultHandler = worker->addDefaultLogger("asm-compiler", "./");
+    auto defaultHandler = worker->addDefaultLogger(logsFilename, logsDir);
     g3::initializeLogging(worker.get());
 
     LOG(INFO) << "Logs were initialized";
@@ -43,11 +46,10 @@ int main(int argc, char** argv) {
     // Initialize logger
     InitializeLogs();
 
-    // Parse assembler.properties
+    // Parse assembler.settings
     std::shared_ptr<PropertyManager> property_manager = std::make_shared<PropertyManager>();
     // Do stuff
-    
-    
+
     return 0;
 }
 

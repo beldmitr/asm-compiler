@@ -6,7 +6,7 @@
 
 /* 
  * File:   PropertyLine.h
- * Author: user
+ * Author: wbull
  *
  * Created on April 23, 2019, 5:31 PM
  */
@@ -15,18 +15,15 @@
 #define PROPERTYLINE_H
 
 #include <string>
+#include <memory>
 
 
 class PropertyLine {
 public:
-    PropertyLine(const std::string& line);
-    virtual ~PropertyLine() = default;
+    static std::shared_ptr<std::pair<std::string, std::string>> GetParsedLine(const std::string& line);
 
-    std::string GetLine() const {
-        return _line;
-    }
 private:
-    std::string _line;  // TODO: Do I need it ???
+
 };
 
 #endif /* PROPERTYLINE_H */

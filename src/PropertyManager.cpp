@@ -26,21 +26,19 @@ PropertyManager::PropertyManager()
     std::fstream file(filename);
     if (!file.is_open())
     {
-        LOG(WARNING) << std::strerror(errno);
+        std::string errMessage = std::strerror(errno);
 
-        // TODO: throw exception or just use errno??
-        return;
+        LOG(WARNING) << errMessage;
+        throw errMessage;
     }
     
     std::string line;
     while(std::getline(file, line))
     {
-        std::shared_ptr<PropertyLine> prop_line = std::make_shared<PropertyLine>(line);
+        auto prop_line = PropertyLine::GetParsedLine(line);
+
     }
     
 }
 
-
-PropertyManager::~PropertyManager() {
-}
 

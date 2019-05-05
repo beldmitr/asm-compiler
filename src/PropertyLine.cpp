@@ -6,7 +6,7 @@
 
 /* 
  * File:   PropertyLine.cpp
- * Author: user
+ * Author: wbull
  * 
  * Created on April 23, 2019, 5:31 PM
  */
@@ -16,29 +16,43 @@
 
 #include <iostream>
 #include <algorithm>
-#include <cstring>
 
-PropertyLine::PropertyLine(const std::string& line) {
-    
-    this->_line = line;
-    
+#include <g3log/g3log.hpp>
+
+std::shared_ptr<std::pair<std::string, std::string>> PropertyLine::GetParsedLine(const std::string &line)
+{
     if (line.empty())
     {
         // ignore this
-        return;
+        return nullptr;
     }
-    std::string nl = Utils::ltrim(line);
-    
-    // Check if this is a comment
-    if (nl[0] == '#')
+
+    // Check if it is a comment
     {
-        // ignore this
-        return;
+        std::string nl = Utils::ltrim(line);
+
+        // Check if this is a comment
+        if (nl[0] == '#')
+        {
+            // ignore this
+            return nullptr;
+        }
     }
-    
-    
-    
-    
-    std::cout << line << std::endl;
+
+    auto parts = Utils::split(line, ":");
+
+    if (parts.size() < 2)
+    {
+        std::string errMessage = "Error while parsing the line " + line;
+        LOG(WARNING) <<  errMessage;
+        throw errMessage;
+    }
+    else if (parts.size() > 2)
+    {
+        LOG(WARNING) << "Too many params parsed in line: " << line << ". Maybe there is something wrong.";
+    }
+
+    auto pr = std::make_shared<std::pair<std::string, std::string>>( parts[0], parts[1] );
+    return  pr;
 }
 

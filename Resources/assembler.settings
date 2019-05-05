@@ -1,0 +1,11 @@
+#
+# Define assembler language for the 6502 processor
+#
+
+LDA addr        :A5pp
+LDA addr,X      :B5pp
+LDA (addr,X)    :A1pp
+LDA (addr),Y    :B1pp
+LDA addr16      :ADppqq
+LDA addr16,X    :D9ppqq
+LDA addr16,Y    :DDppqq

@@ -6,7 +6,7 @@
 
 /* 
  * File:   PropertyManager.h
- * Author: user
+ * Author: wbull
  *
  * Created on April 23, 2019, 5:11 PM
  */
@@ -21,9 +21,9 @@
 class PropertyManager {
 public:
     PropertyManager();
-    virtual ~PropertyManager();
+    virtual ~PropertyManager() = default;
 private:
-    const std::string filename = "../Resources/assembler.properties";
+    const std::string filename = "../Resources/assembler.settings";
     std::map<std::string, std::string> property_map;
 };
 

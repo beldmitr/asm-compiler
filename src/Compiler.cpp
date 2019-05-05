@@ -6,7 +6,7 @@
 
 /* 
  * File:   Compiler.cpp
- * Author: user
+ * Author: wbull
  * 
  * Created on April 23, 2019, 5:03 PM
  */
