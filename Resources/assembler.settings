@@ -1,11 +1,365 @@
-#
-# Define assembler language for the 6502 processor
-#
+###################################################################
+###################################################################
+##                                                               ##
+##       Define assembler language for the 6502 processor        ##
+##                                                               ##
+###################################################################
+###################################################################
 
-LDA addr        :A5pp
-LDA addr,X      :B5pp
-LDA (addr,X)    :A1pp
-LDA (addr),Y    :B1pp
-LDA addr16      :ADppqq
-LDA addr16,X    :D9ppqq
-LDA addr16,Y    :DDppqq
+
+#################################################
+#       I/O and Primary Memory Reference        #
+#################################################
+
+#   LDA
+LDA addr        :A5 pp
+LDA addr, X     :B5 pp
+LDA (addr, X)   :A1 pp
+LDA (addr), Y   :B1 pp
+LDA addr16      :AD pp qq
+LDA addr16, X   :D9 pp qq   # TODO check this
+LDA addr16, Y   :DD pp qq   # TODO check this
+
+#   STA
+STA addr        :85 pp
+STA addr, X     :95 pp
+STA (addr, X)   :81 pp
+STA (addr), Y   :91 pp
+STA addr16      :8D pp qq
+STA addr16, X   :99 pp qq   # TODO check this
+STA addr16, Y   :9D pp qq   # TODO check this
+
+#   LDX
+LDX addr        :A6 pp
+LDX addr, Y     :B6 pp
+LDX addr16      :AE pp qq
+LDX addr, Y     :BE pp qq
+
+#   STX
+STX addr        :86 pp
+STX addr, Y     :96 pp
+STX addr16      :8E pp qq
+
+#   LDY
+LDY addr        :A4 pp
+LDY addr, X     :B4 pp
+LDY addr16      :AC pp qq
+LDY addr16, X   :BC pp qq
+
+#   STY
+STY addr        :84 pp
+STY addr, X     :94 pp
+STY addr16      :8C pp qq
+
+
+#########################################################
+#       Secondary Memory Reference (Memory operate)     #
+#########################################################
+
+#   ADC
+ADC addr        :65 pp
+ADC addr, X     :75 pp
+ADC (addr, X)   :61 pp
+ADC (addr), Y   :71 pp
+ADC addr16      :6D pp qq
+ADC addr16, X   :79 pp qq   # TODO check this
+ADC addr16, Y   :7D pp qq   # TODO check this
+
+#   AND
+AND addr        :25 pp
+AND addr, X     :35 pp
+AND (addr, X)   :21 pp
+AND (addr), Y   :31 pp
+AND addr16      :2D pp qq
+AND addr16, X   :39 pp qq   # TODO check me
+AND addr16, Y   :3D pp qq   # TODO check me
+
+#   BIT
+BIT addr        :24 pp
+BIT addr16      :2C pp qq
+
+#   CMP
+CMP addr        :C5 pp
+CMP addr, X     :D5 pp
+CMP (addr, X)   :C1 pp
+CMP (addr), Y   :D1 pp
+CMP addr16      :CD pp qq
+CMP addr16, X   :D9 pp qq
+CMP addr16, Y   :DD pp qq
+
+#   EOR
+EOR addr        :45 pp
+EOR addr, X     :55 pp
+EOR (addr, X)   :41 pp
+EOR (addr), Y   :51 pp
+EOR addr16      :4D pp qq
+EOR addr16, X   :59 pp qq
+EOR addr16, Y   :5D pp qq
+
+#   ORA
+ORA addr        :05 pp
+ORA addr, X     :15 pp
+ORA (addr, X)   :01 pp
+ORA (addr), Y   :11 pp
+ORA addr16      :0D pp qq
+ORA addr16, X   :19 pp qq
+ORA addr16, Y   :1D pp qq
+
+#   SBC
+SBC addr        :E5 pp
+SBC addr, X     :F5 pp
+SBC (addr, X)   :E1 pp
+SBC (addr), Y   :F1 pp
+SBC addr16      :ED pp qq
+SBC addr16, X   :F9 pp qq
+SBC addr16, Y   :FD pp qq
+
+#   INC
+INC addr        :E6 pp
+INC addr, X     :F6 pp
+INC addr16      :EE pp qq
+INC addr16, X   :FE pp qq
+
+#   DEC
+DEC addr        :C6 pp
+DEC addr, X     :D6 pp
+DEC addr16      :CE pp qq
+DEC addr16, X   :DE pp qq
+
+#   CPX
+CPX addr        :E4 pp
+CPX addr16      :EC pp qq
+
+#   CPY
+CPY addr        :C4 pp
+CPY addr16      :CC pp qq
+
+#   ROL
+ROL addr        :26 pp
+ROL addr, X     :36 pp
+ROL addr16      :2E pp qq
+ROL addr16, X   :3E pp qq
+
+#   ROR
+ROR addr        :66 pp
+ROR addr, X     :76 pp
+ROR addr16      :6E pp
+ROR addr16, X   :7E pp qq
+
+#   ASL
+ASL addr        :06 pp
+ASL addr, X     :16 pp
+ASL addr16      :0E pp qq
+ASL addr16, X   :1E pp qq
+
+#   LSR
+LSR addr        :46 pp
+LSR addr, X     :56 pp
+LSR addr16      :4E pp qq
+LSR addr16, X   :5E pp qq
+
+
+#########################
+#       Immediate       #
+#########################
+
+#   LDA
+LDA data        :A9 pp
+
+#   LDX
+LDX data        :A2 pp
+
+#   LDY
+LDY data        :A0 pp
+
+
+#################################
+#       Immediate Operate       #
+#################################
+
+#   ADC
+ADC data        :69 pp
+
+#   AND
+AND data        :29 pp
+
+#   CMP
+CMP data        :C9 pp
+
+#   EOR
+EOR data        :49 pp
+
+#   ORA
+ORA data        :09 pp
+
+#   SBC
+SBC data        :E9 pp
+
+#   CPX
+CPX data        :E0 pp
+
+#   CPY
+CPY data        :C0 pp
+
+
+#####################
+#       JUMP        #
+#####################
+
+#   JMP
+JMP label       :4C pp qq
+JMP (label)     :6c pp qq
+
+
+#################################
+#       Branch on Condition     #
+#################################
+
+#   BCC
+BCC disp        :90 pp
+
+#   BCS
+BCS disp        :B0 pp
+
+#   BEQ
+BEQ disp        :F0 pp
+
+#   BMI
+BMI disp        :30 pp
+
+#   BNE
+BNE disp        :D0 pp
+
+#   BPL
+BPL disp        :10 pp
+
+#   BVC
+BVC disp        :50 pp
+
+#   BVS
+BVS disp        :70 pp
+
+
+#########################################
+#       Subroutine Call and Return      #
+#########################################
+
+#   JSR
+JSR label       :20 pp qq
+
+#   RTS
+RTS             :60
+
+
+#########################################
+#       Register - Register Move        #
+#########################################
+
+#   TAX
+TAX             :AA
+
+#   TXA
+TXA             :8A
+
+#   TAY
+TAY             :A8
+
+#   TYA
+TYA             :98
+
+#   TSX
+TSX             :BA
+
+#   TXS
+TXS             :9A
+
+
+#################################
+#       Register Operate        #
+#################################
+
+#   DEX
+DEX             :CA
+
+#   DEY
+DEY             :88
+
+#   INX
+INX             :E8
+
+#   INY
+INY             :C8
+
+#   ROL
+ROL A           :2A
+
+#   ROR
+ROR A           :6A
+
+#   ASL
+ASL A           :0A
+
+#   LSR
+LSR A           :4A
+
+
+#####################
+#       Stack       #
+#####################
+
+#   PHA
+PHA             :48
+
+#   PLA
+PLA             :68
+
+#   PHP
+PHP             :08
+
+#   PLP
+PLP             :28
+
+
+#########################
+#       Interrupt       #
+#########################
+
+#   CLI
+CLI             :58
+
+#   SEI
+SEI             :78
+
+#   RTI
+RTI             :40
+
+#   BRK
+BRK             :00
+
+
+#####################
+#       Status      #
+#####################
+
+#   CLC
+CLC             :18
+
+#   SEC
+SEC             :38
+
+#   CLD
+CLD             :D8
+
+#   SED
+SED             :F8
+
+#   CLV
+CLV             :B8
+
+
+##################
+#       NOP      #
+##################
+
+#   NOP
+NOP             :EA
